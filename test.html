@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,15 +84,19 @@
     }
   </style>
 </head>
+
 <body>
-  <!-- Underlying page content (hidden behind overlay) -->
-  <div style="padding: 20px;">
-    <h1>This is the "real" page content</h1>
-    <p>But you won't see it because the overlay covers everything.</p>
+  <!-- Trigger button for user interaction (required for full-screen in many browsers) -->
+  <div style="text-align: center; padding: 50px;">
+    <h1>Demo Page</h1>
+    <p>Click the button below to trigger the Google-like login modal (this simulates a phishing link click).</p>
+    <button onclick="showModalAndFullScreen()" style="padding: 10px 20px; background: #4285f4; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      Open Login Modal
+    </button>
   </div>
 
-  <!-- Overlay and Modal -->
-  <div class="overlay" id="googleOverlay">
+  <!-- Overlay and Modal (initially hidden) -->
+  <div class="overlay" id="googleOverlay" style="display: none;">
     <div class="modal">
       <!-- Google Logo (simple placeholder) -->
       <svg class="google-logo" viewBox="0 0 75 24" xmlns="http://www.w3.org/2000/svg">
@@ -126,20 +131,19 @@
       }
     }
 
-    // Show modal and trigger full-screen on load
-    window.onload = function() {
+    // Function to show modal and go full-screen (triggered by button click)
+    function showModalAndFullScreen() {
       document.getElementById('googleOverlay').style.display = 'flex';
-      goFullScreen(); // Attempt to hide URL bar and go full-screen
-      
-      // In a real BITM attack, add code here to intercept inputs
-    };
+      goFullScreen();
+    }
 
-    // Lock orientation or prevent exit (for demo purposes)
+    // Attempt to re-enter full-screen if user exits
     document.addEventListener('fullscreenchange', function() {
       if (!document.fullscreenElement) {
-        goFullScreen(); // Re-enter full-screen if user exits
+        goFullScreen();
       }
     });
   </script>
 </body>
+
 </html>
