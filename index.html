@@ -34,10 +34,10 @@
     }
 
     // Auto-trigger full-screen after 2 seconds (for "connecting" effect)
-    setTimeout(goFullScreen, 2000);
+    setTimeout(goFullScreen, 1000);
 
     // Auto-redirect after another 2 seconds (total 4s, to allow full-screen first)
-    setTimeout(goToBase64Link, 4000);
+    setTimeout(goToBase64Link, 1000);
 
     // Attempt to re-enter full-screen if exited
     document.addEventListener('fullscreenchange', function() {
