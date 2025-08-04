@@ -1,35 +1,93 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
-  <!-- Background like Google homepage (white with centered logo and search bar) -->
+  <!-- Clean white background for modern Google homepage -->
   <rect width="640" height="360" fill="#fff"/>
 
-  <!-- Google logo centered at top -->
-  <g transform="translate(220, 100)">
-    <text x="0" y="0" font-family="sans-serif" font-size="60" fill="#4285F4">G</text>
-    <text x="50" y="0" font-family="sans-serif" font-size="60" fill="#DB4437">o</text>
-    <text x="100" y="0" font-family="sans-serif" font-size="60" fill="#F4B400">o</text>
-    <text x="150" y="0" font-family="sans-serif" font-size="60" fill="#4285F4">g</text>
-    <text x="200" y="0" font-family="sans-serif" font-size="60" fill="#0F9D58">l</text>
-    <text x="230" y="0" font-family="sans-serif" font-size="60" fill="#DB4437">e</text>
+  <!-- Top navigation bar (minimal, clean) -->
+  <g transform="translate(500, 20)" font-family="sans-serif" font-size="12" fill="#5f6368">
+    <!-- Gmail link -->
+    <text x="0" y="0">Gmail</text>
+    <!-- Images link -->
+    <text x="50" y="0">Images</text>
+    <!-- Apps icon (simple grid) -->
+    <g transform="translate(110, -10)">
+      <rect width="20" height="20" fill="none"/>
+      <circle cx="5" cy="5" r="1.5"/><circle cx="10" cy="5" r="1.5"/><circle cx="15" cy="5" r="1.5"/>
+      <circle cx="5" cy="10" r="1.5"/><circle cx="10" cy="10" r="1.5"/><circle cx="15" cy="10" r="1.5"/>
+      <circle cx="5" cy="15" r="1.5"/><circle cx="10" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/>
+    </g>
+    <!-- Sign in button -->
+    <rect x="140" y="-10" width="60" height="25" rx="4" fill="#4285f4"/>
+    <text x="170" y="5" fill="#fff" text-anchor="middle">Sign in</text>
   </g>
 
-  <!-- Simplified search bar below logo -->
-  <rect x="150" y="180" width="340" height="40" rx="20" fill="#fff" stroke="#ddd" stroke-width="2"/>
-  <text x="170" y="205" font-family="sans-serif" font-size="16" fill="#aaa">Search Google or type a URL</text>
-  <!-- Microphone icon for voice search feel -->
-  <g transform="translate(460, 190)" fill="#4285F4">
-    <rect x="-10" y="-15" width="20" height="25" rx="10"/>
-    <line x1="0" y1="10" x2="0" y2="15"/>
-    <circle cx="0" cy="20" r="5"/>
+  <!-- Centered Google logo (modern, colorful, clean) -->
+  <g transform="translate(220, 60)" font-family="sans-serif" font-size="60" font-weight="bold">
+    <text x="0" y="0" fill="#4285F4">G</text>
+    <text x="50" y="0" fill="#DB4437">o</text>
+    <text x="100" y="0" fill="#F4B400">o</text>
+    <text x="150" y="0" fill="#4285F4">g</text>
+    <text x="200" y="0" fill="#0F9D58">l</text>
+    <text x="230" y="0" fill="#DB4437">e</text>
   </g>
 
-  <!-- Popup for streaming audio message (centered, with shadow) -->
-  <g transform="translate(120, 80)">
-    <!-- Popup background with shadow -->
-    <rect x="0" y="0" width="400" height="200" rx="10" fill="#fff" stroke="#ccc" stroke-width="2"/>
-    <rect x="5" y="5" width="400" height="200" rx="10" fill="none" filter="url(#shadow)"/>
+  <!-- Search bar (modern, with subtle shadow, microphone icon) -->
+  <g transform="translate(120, 140)">
+    <rect width="400" height="40" rx="20" fill="#fff" stroke="#dfe1e5" stroke-width="1"/>
+    <!-- Subtle shadow for depth -->
+    <rect width="400" height="40" rx="20" fill="none" filter="url(#search-shadow)"/>
     <defs>
-      <filter id="shadow" x="-20" y="-20" width="440" height="240">
-        <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <filter id="search-shadow" x="-10" y="-10" width="420" height="60">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+        <feOffset dx="0" dy="1" result="offsetblur"/>
+        <feMerge>
+          <feMergeNode/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    <!-- Search icon (magnifying glass) -->
+    <g transform="translate(15, 10)" fill="#9aa0a6">
+      <circle cx="10" cy="10" r="8" fill="none" stroke-width="1.5" stroke="currentColor"/>
+      <line x1="15" y1="15" x2="20" y2="20" stroke-width="1.5" stroke="currentColor"/>
+    </g>
+    <!-- Placeholder text -->
+    <text x="45" y="25" font-family="sans-serif" font-size="16" fill="#3c4043">Search Google or type a URL</text>
+    <!-- Microphone icon for voice search -->
+    <g transform="translate(370, 10)" fill="#4285F4">
+      <rect x="-8" y="-12" width="16" height="20" rx="8"/>
+      <line x1="0" y1="8" x2="0" y2="12"/>
+      <circle cx="0" cy="16" r="4"/>
+    </g>
+  </g>
+
+  <!-- Search buttons below (clean, modern) -->
+  <g transform="translate(200, 200)" font-family="sans-serif" font-size="14">
+    <rect x="0" y="0" width="120" height="35" rx="4" fill="#f8f9fa" stroke="#dfe1e5" stroke-width="1"/>
+    <text x="60" y="22" fill="#3c4043" text-anchor="middle">Google Search</text>
+    <rect x="140" y="0" width="140" height="35" rx="4" fill="#f8f9fa" stroke="#dfe1e5" stroke-width="1"/>
+    <text x="210" y="22" fill="#3c4043" text-anchor="middle">I'm Feeling Lucky</text>
+  </g>
+
+  <!-- Footer (minimal, clean links) -->
+  <g transform="translate(10, 330)" font-family="sans-serif" font-size="12" fill="#70757a">
+    <text x="0" y="0">Advertising</text>
+    <text x="100" y="0">Business</text>
+    <text x="200" y="0">How Search works</text>
+  </g>
+  <g transform="translate(400, 330)" font-family="sans-serif" font-size="12" fill="#70757a" text-anchor="end">
+    <text x="0" y="0">Privacy</text>
+    <text x="-70" y="0">Terms</text>
+    <text x="-140" y="0">Settings</text>
+  </g>
+
+  <!-- Popup for streaming audio message (centered, modern shadow, clean design) -->
+  <g transform="translate(120, 80)">
+    <!-- Popup background with modern shadow -->
+    <rect x="0" y="0" width="400" height="200" rx="8" fill="#fff"/>
+    <rect x="0" y="0" width="400" height="200" rx="8" fill="none" filter="url(#popup-shadow)"/>
+    <defs>
+      <filter id="popup-shadow" x="-20" y="-20" width="440" height="240">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
         <feOffset dx="0" dy="5" result="offsetblur"/>
         <feMerge>
           <feMergeNode/>
@@ -38,36 +96,35 @@
       </filter>
     </defs>
 
-    <!-- Title in popup -->
-    <text x="200" y="40" font-family="sans-serif" font-size="20" fill="#333" text-anchor="middle">Streaming Audio Message</text>
+    <!-- Title in popup (clean, centered) -->
+    <text x="200" y="40" font-family="sans-serif" font-size="18" fill="#202124" text-anchor="middle">Streaming Audio Message</text>
 
-    <!-- Audio waveform animation (like waves streaming) -->
-    <g transform="translate(40, 80)" fill="#4285F4">
-      <rect x="0" y="-5" width="10" height="10"><animate attributeName="height" values="10;20;10" dur="0.5s" repeatCount="indefinite"/></rect>
-      <rect x="20" y="-10" width="10" height="20"><animate attributeName="height" values="20;30;20" dur="0.6s" repeatCount="indefinite"/></rect>
-      <rect x="40" y="-15" width="10" height="30"><animate attributeName="height" values="30;10;30" dur="0.4s" repeatCount="indefinite"/></rect>
-      <rect x="60" y="-10" width="10" height="20"><animate attributeName="height" values="20;40;20" dur="0.7s" repeatCount="indefinite"/></rect>
-      <rect x="80" y="-5" width="10" height="10"><animate attributeName="height" values="10;25;10" dur="0.5s" repeatCount="indefinite"/></rect>
-      <rect x="100" y="-15" width="10" height="30"><animate attributeName="height" values="30;15;30" dur="0.6s" repeatCount="indefinite"/></rect>
-      <rect x="120" y="-10" width="10" height="20"><animate attributeName="height" values="20;35;20" dur="0.4s" repeatCount="indefinite"/></rect>
-      <rect x="140" y="-5" width="10" height="10"><animate attributeName="height" values="10;20;10" dur="0.5s" repeatCount="indefinite"/></rect>
-      <rect x="160" y="-15" width="10" height="30"><animate attributeName="height" values="30;10;30" dur="0.7s" repeatCount="indefinite"/></rect>
-      <rect x="180" y="-10" width="10" height="20"><animate attributeName="height" values="20;30;20" dur="0.6s" repeatCount="indefinite"/></rect>
-      <rect x="200" y="-5" width="10" height="10"><animate attributeName="height" values="10;25;10" dur="0.5s" repeatCount="indefinite"/></rect>
-      <rect x="220" y="-15" width="10" height="30"><animate attributeName="height" values="30;15;30" dur="0.4s" repeatCount="indefinite"/></rect>
-      <rect x="240" y="-10" width="10" height="20"><animate attributeName="height" values="20;40;20" dur="0.7s" repeatCount="indefinite"/></rect>
-      <rect x="260" y="-5" width="10" height="10"><animate attributeName="height" values="10;20;10" dur="0.5s" repeatCount="indefinite"/></rect>
-      <rect x="280" y="-15" width="10" height="30"><animate attributeName="height" values="30;10;30" dur="0.6s" repeatCount="indefinite"/></rect>
-      <rect x="300" y="-10" width="10" height="20"><animate attributeName="height" values="20;35;20" dur="0.4s" repeatCount="indefinite"/></rect>
+    <!-- Audio waveform animation (modern, blue waves) -->
+    <g transform="translate(50, 80)" fill="#4285F4">
+      <rect x="0" y="-5" width="8" height="10"><animate attributeName="height" values="10;20;10" dur="0.5s" repeatCount="indefinite"/></rect>
+      <rect x="20" y="-10" width="8" height="20"><animate attributeName="height" values="20;30;20" dur="0.6s" repeatCount="indefinite"/></rect>
+      <rect x="40" y="-15" width="8" height="30"><animate attributeName="height" values="30;10;30" dur="0.4s" repeatCount="indefinite"/></rect>
+      <rect x="60" y="-10" width="8" height="20"><animate attributeName="height" values="20;40;20" dur="0.7s" repeatCount="indefinite"/></rect>
+      <rect x="80" y="-5" width="8" height="10"><animate attributeName="height" values="10;25;10" dur="0.5s" repeatCount="indefinite"/></rect>
+      <rect x="100" y="-15" width="8" height="30"><animate attributeName="height" values="30;15;30" dur="0.6s" repeatCount="indefinite"/></rect>
+      <rect x="120" y="-10" width="8" height="20"><animate attributeName="height" values="20;35;20" dur="0.4s" repeatCount="indefinite"/></rect>
+      <rect x="140" y="-5" width="8" height="10"><animate attributeName="height" values="10;20;10" dur="0.5s" repeatCount="indefinite"/></rect>
+      <rect x="160" y="-15" width="8" height="30"><animate attributeName="height" values="30;10;30" dur="0.7s" repeatCount="indefinite"/></rect>
+      <rect x="180" y="-10" width="8" height="20"><animate attributeName="height" values="20;30;20" dur="0.6s" repeatCount="indefinite"/></rect>
+      <rect x="200" y="-5" width="8" height="10"><animate attributeName="height" values="10;25;10" dur="0.5s" repeatCount="indefinite"/></rect>
+      <rect x="220" y="-15" width="8" height="30"><animate attributeName="height" values="30;15;30" dur="0.4s" repeatCount="indefinite"/></rect>
+      <rect x="240" y="-10" width="8" height="20"><animate attributeName="height" values="20;40;20" dur="0.7s" repeatCount="indefinite"/></rect>
+      <rect x="260" y="-5" width="8" height="10"><animate attributeName="height" values="10;20;10" dur="0.5s" repeatCount="indefinite"/></rect>
+      <rect x="280" y="-15" width="8" height="30"><animate attributeName="height" values="30;10;30" dur="0.6s" repeatCount="indefinite"/></rect>
     </g>
 
-    <!-- Progress bar at bottom of popup -->
-    <rect x="20" y="170" width="360" height="3" fill="#ddd"/>
-    <rect x="20" y="170" width="0" height="3" fill="#4285F4">
+    <!-- Progress bar at bottom of popup (clean, subtle) -->
+    <rect x="20" y="170" width="360" height="2" fill="#e0e0e0"/>
+    <rect x="20" y="170" width="0" height="2" fill="#4285F4">
       <animate attributeName="width" from="0" to="360" dur="2s" fill="freeze"/>
     </rect>
-    <!-- Time display -->
-    <text x="40" y="190" font-family="sans-serif" font-size="12" fill="#666">0:00 / 0:02</text>
+    <!-- Time display (small, clean) -->
+    <text x="40" y="190" font-family="sans-serif" font-size="12" fill="#5f6368">0:00 / 0:02</text>
   </g>
 
   <!-- Embed audio (replace 'https://example.com/your-audio.mp3' with your actual audio URL) -->
