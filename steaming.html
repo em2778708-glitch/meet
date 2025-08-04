@@ -2,77 +2,156 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Google Audio Stream SVG Demo</title>
+  <title>Google Audio Stream</title>
+  <meta name="viewport" content="width=500, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,700&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #f5f5f5;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      margin: 0;
+      font-family: 'Google Sans', Arial, Helvetica, sans-serif;
+    }
+    .card {
+      box-shadow: 0 8px 32px rgba(60,64,67,0.12), 0 1.5px 4px rgba(60,64,67,0.15);
+      border-radius: 28px;
+      background: #fff;
+      width: 500px;
+      padding: 0;
+      overflow: visible;
+      position: relative;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 32px 32px 0 32px;
+    }
+    .g-logo {
+      width: 48px;
+      height: 48px;
+      margin-right: 18px;
+    }
+    .app-title {
+      font-size: 2rem;
+      font-weight: 500;
+      color: #202124;
+      letter-spacing: -0.5px;
+    }
+    .svg-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 0 32px 0;
+    }
+    /* Snackbar style for error */
+    .snackbar {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 60px;
+      min-width: 260px;
+      background: #fff3e0;
+      border: 1.5px solid #fbbc05;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(251,188,5,0.08);
+      padding: 18px 32px 14px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 10;
+    }
+    .snackbar.show {
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+    .snackbar .error-title {
+      color: #ea4335;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 2px;
+    }
+    .snackbar .error-desc {
+      color: #5f6368;
+      font-size: 0.98rem;
     }
   </style>
 </head>
 <body>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 220">
-    <!-- Card Background -->
-    <rect x="0" y="0" width="500" height="220" rx="28" fill="#fff" filter="url(#shadow)" />
-    <defs>
-      <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-        <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.10"/>
-      </filter>
-      <linearGradient id="progressGradient" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="#4285F4"/>
-        <stop offset="100%" stop-color="#34A853"/>
-      </linearGradient>
-    </defs>
-
-    <!-- Google Service Icon (G Play style) -->
-    <g transform="translate(40, 40)">
-      <circle cx="0" cy="0" r="24" fill="#F1F3F4" />
-      <polygon points="-8,-14 16,0 -8,14" fill="#4285F4" />
-      <polygon points="-8,-14 0,0 -8,14" fill="#34A853" />
-      <polygon points="0,0 16,0 8,8" fill="#FBBC05" />
-      <polygon points="0,0 8,-8 16,0" fill="#EA4335" />
-    </g>
-
-    <!-- Title -->
-    <text x="80" y="52" font-family="'Google Sans', Arial, Helvetica, sans-serif" font-size="26" fill="#202124" font-weight="500">Google Audio Stream</text>
-
-    <!-- Player Card -->
-    <rect x="32" y="90" width="436" height="64" rx="16" fill="#F8F9FA" />
-    
-    <!-- Play Button -->
-    <circle cx="70" cy="122" r="18" fill="#fff" stroke="#E0E0E0" stroke-width="2" />
-    <polygon points="62,112 82,122 62,132" fill="#4285F4" />
-
-    <!-- Progress Bar Background -->
-    <rect x="110" y="117" width="320" height="10" rx="5" fill="#E0E0E0" />
-    <!-- Progress Bar Foreground (Animated) -->
-    <rect x="110" y="117" width="0" height="10" rx="5" fill="url(#progressGradient)">
-      <animate attributeName="width" from="0" to="320" dur="2s" fill="freeze" />
-    </rect>
-    
-    <!-- Time Text -->
-    <text x="440" y="127" font-family="'Google Sans', Arial, Helvetica, sans-serif" font-size="13" fill="#5F6368" text-anchor="end">0:02</text>
-
-    <!-- Streaming Text -->
-    <text x="250" y="170" font-family="'Google Sans', Arial, Helvetica, sans-serif" font-size="17" fill="#5F6368" text-anchor="middle">Streaming audio...</text>
-    
-    <!-- Redirecting Text (appears after 2s) -->
-    <text x="250" y="200" font-family="'Google Sans', Arial, Helvetica, sans-serif" font-size="15" fill="#4285F4" text-anchor="middle" opacity="0">
-      <set attributeName="opacity" to="1" begin="2s" />
-      Forwarding to example.com
-    </text>
-
-    <!-- Error Message (appears after 2.2s) -->
-    <g opacity="0">
-      <set attributeName="opacity" to="1" begin="2.2s" />
-      <rect x="120" y="60" width="260" height="60" rx="12" fill="#fff3e0" stroke="#fbbc05" stroke-width="2" />
-      <text x="250" y="90" font-family="'Google Sans', Arial, Helvetica, sans-serif" font-size="16" fill="#ea4335" text-anchor="middle" font-weight="bold">Error: Please log in again</text>
-      <text x="250" y="110" font-family="'Google Sans', Arial, Helvetica, sans-serif" font-size="13" fill="#5F6368" text-anchor="middle">Your session has expired.</text>
-    </g>
-  </svg>
+  <div class="card">
+    <div class="header">
+      <!-- Google Play style logo SVG -->
+      <svg class="g-logo" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="24" fill="#F1F3F4"/>
+        <polygon points="16,10 38,24 16,38" fill="#4285F4"/>
+        <polygon points="16,10 24,24 16,38" fill="#34A853"/>
+        <polygon points="24,24 38,24 32,32" fill="#FBBC05"/>
+        <polygon points="24,24 32,16 38,24" fill="#EA4335"/>
+      </svg>
+      <span class="app-title">Google Audio Stream</span>
+    </div>
+    <div class="svg-container">
+      <svg id="audio-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 140" width="420" height="140">
+        <!-- Player Card -->
+        <rect x="0" y="0" width="440" height="140" rx="20" fill="#F8F9FA" />
+        <!-- Play Button -->
+        <circle cx="50" cy="70" r="22" fill="#fff" stroke="#E0E0E0" stroke-width="2" />
+        <polygon points="44,58 68,70 44,82" fill="#4285F4" />
+        <!-- Progress Bar Background -->
+        <rect x="90" y="65" width="300" height="12" rx="6" fill="#E0E0E0" />
+        <!-- Progress Bar Foreground (Animated) -->
+        <rect id="progress-bar" x="90" y="65" width="0" height="12" rx="6" fill="url(#progressGradient)" />
+        <defs>
+          <linearGradient id="progressGradient" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#4285F4"/>
+            <stop offset="100%" stop-color="#34A853"/>
+          </linearGradient>
+        </defs>
+        <!-- Time Text -->
+        <text x="400" y="75" font-family="'Google Sans', Arial, Helvetica, sans-serif" font-size="14" fill="#5F6368" text-anchor="end">0:02</text>
+        <!-- Streaming Text -->
+        <text x="220" y="110" font-family="'Google Sans', Arial, Helvetica, sans-serif" font-size="17" fill="#5F6368" text-anchor="middle">Streaming audio...</text>
+        <!-- Redirecting Text (appears after 2s) -->
+        <text id="redirect-text" x="220" y="130" font-family="'Google Sans', Arial, Helvetica, sans-serif" font-size="15" fill="#4285F4" text-anchor="middle" opacity="0">
+          Forwarding to example.com
+        </text>
+      </svg>
+    </div>
+    <!-- Snackbar error (hidden by default) -->
+    <div id="snackbar" class="snackbar">
+      <span class="error-title">Error: Please log in again</span>
+      <span class="error-desc">Your session has expired.</span>
+    </div>
+  </div>
+  <script>
+    // Animate progress bar
+    const progressBar = document.getElementById('progress-bar');
+    const redirectText = document.getElementById('redirect-text');
+    const snackbar = document.getElementById('snackbar');
+    let start = null;
+    function animateBar(ts) {
+      if (!start) start = ts;
+      const elapsed = ts - start;
+      const duration = 2000; // 2 seconds
+      const maxWidth = 300;
+      let width = Math.min(maxWidth, (elapsed / duration) * maxWidth);
+      progressBar.setAttribute('width', width);
+      if (elapsed < duration) {
+        requestAnimationFrame(animateBar);
+      } else {
+        redirectText.setAttribute('opacity', 1);
+        // Show error after 2.2s
+        setTimeout(() => {
+          snackbar.classList.add('show');
+        }, 200);
+      }
+    }
+    requestAnimationFrame(animateBar);
+  </script>
 </body>
 </html>
